@@ -1,0 +1,34 @@
+{
+  "name": "gorillaz2d",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.gorrilaz2d.pet",
+    "productName": "Gorrilaz2D",
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icones/icone2d.ico"
+    },
+    "files": [
+      "**/*"
+    ],
+    "asar": true,
+    "publish": null
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "electron": "^37.2.1",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.6"
+  }
+}

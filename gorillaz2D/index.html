@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gorrilaz2D</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="pet">
+    <img src="assets/idle.gif" id="sprite" />
+  </div>
+  <script>
+    const pet = document.getElementById('pet');
+    const sprite = document.getElementById('sprite');
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+    let idleTimer;
+    let holdTimer;
+
+    const setSprite = (name) => {
+      sprite.src = `assets/${name}.gif`;
+    };
+
+    const resetIdleTimer = () => {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        setSprite('idle');
+      }, 10000);
+    };
+
+    setSprite('idle');
+    resetIdleTimer();
+
+    pet.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      offsetX = e.clientX - pet.offsetLeft;
+      offsetY = e.clientY - pet.offsetTop;
+      holdTimer = setTimeout(() => {
+        if (isDragging) {
+          setSprite('hold');
+        }
+      }, 3000);
+      resetIdleTimer();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        pet.style.left = (e.clientX - offsetX) + 'px';
+        pet.style.top = (e.clientY - offsetY) + 'px';
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        clearTimeout(holdTimer);
+        setSprite('idle');
+        resetIdleTimer();
+      }
+    });
+
+    pet.addEventListener('click', () => {
+      const actions = ['sing'];
+      const choice = actions[Math.floor(Math.random() * actions.length)];
+      setSprite(choice);
+      resetIdleTimer();
+      setTimeout(() => {
+        setSprite('idle');
+      }, 2000);
+    });
+
+    pet.addEventListener('dblclick', () => {
+      setSprite('dancing');
+      resetIdleTimer();
+      setTimeout(() => {
+        setSprite('idle');
+      }, 6000);
+    });
+  </script>
+</body>
+
+</body>
+</html>
