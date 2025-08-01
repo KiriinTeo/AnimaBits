@@ -17,6 +17,8 @@
     let offsetY = 0;
     let idleTimer;
     let holdTimer;
+    let animationTimer;
+    let isLocked = false;
 
     const setSprite = (name) => {
       sprite.src = `assets/${name}.gif`;
@@ -25,14 +27,15 @@
     const resetIdleTimer = () => {
       clearTimeout(idleTimer);
       idleTimer = setTimeout(() => {
-        setSprite('idle');
-      }, 10000);
+        setSprite('bored');
+      }, 15000);
     };
 
     setSprite('idle');
     resetIdleTimer();
 
     pet.addEventListener('mousedown', (e) => {
+      if (isLocked) return;
       isDragging = true;
       offsetX = e.clientX - pet.offsetLeft;
       offsetY = e.clientY - pet.offsetTop;
@@ -40,11 +43,12 @@
         if (isDragging) {
           setSprite('hold');
         }
-      }, 3000);
+      }, 4000);
       resetIdleTimer();
     });
 
     document.addEventListener('mousemove', (e) => {
+      if (isLocked) return;
       if (isDragging) {
         pet.style.left = (e.clientX - offsetX) + 'px';
         pet.style.top = (e.clientY - offsetY) + 'px';
@@ -52,6 +56,7 @@
     });
 
     document.addEventListener('mouseup', () => {
+      if (isLocked) return;
       if (isDragging) {
         isDragging = false;
         clearTimeout(holdTimer);
@@ -61,21 +66,44 @@
     });
 
     pet.addEventListener('click', () => {
-      const actions = ['sing'];
+      if (isLocked) return;
+      const actions = ['spin', 'bored', 'hold'];
       const choice = actions[Math.floor(Math.random() * actions.length)];
       setSprite(choice);
-      resetIdleTimer();
-      setTimeout(() => {
+      clearTimeout(animationTimer);
+      animationTimer = setTimeout(() => {
         setSprite('idle');
-      }, 2000);
+      }, 5000);
+      resetIdleTimer();
     });
 
-    pet.addEventListener('dblclick', () => {
-      setSprite('dancing');
-      resetIdleTimer();
+    function startTransformSequence() {
+      isLocked = true;
+      clearTimeout(idleTimer);
+      clearTimeout(animationTimer);
+
+      setSprite('transform');
+
       setTimeout(() => {
-        setSprite('idle');
-      }, 6000);
+        setSprite('idleSuper');
+
+        setTimeout(() => {
+          setSprite('idle');
+          isLocked = false;
+          resetIdleTimer();
+        }, 10000);
+
+      }, 12000);
+    }
+    
+    /*pet.addEventListener('dblclick', () => {
+      if (isLocked) return;
+      startTransformSequence();
+    });*/
+
+    document.addEventListener('keydown', () => {
+      if (isLocked) return;
+      startTransformSequence();
     });
   </script>
 </body>

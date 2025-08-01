@@ -3,8 +3,8 @@ const path = require('path');
 
 function createWindow() {
   const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
-  const windowWidth = 300;
-  const windowHeight = 300;
+  const windowWidth = 400;
+  const windowHeight = 400;
 
   const win = new BrowserWindow({
     width: windowWidth,
@@ -34,14 +34,14 @@ function createWindow() {
 }
 const AutoLaunch = require('auto-launch');
 
-const gorillazAutoLauncher = new AutoLaunch({
-  name: 'Gorrilaz2D',
+const shadowAutoLauncher = new AutoLaunch({
+  name: 'ShadowBit',
   path: app.getPath('exe'),
 });
 
-gorillazAutoLauncher.isEnabled().then((isEnabled) => {
+shadowAutoLauncher.isEnabled().then((isEnabled) => {
   if (!isEnabled) {
-    gorillazAutoLauncher.enable();
+    shadowAutoLauncher.enable();
   }
 }).catch((err) => {
   console.error('Erro ao configurar auto-launch:', err);

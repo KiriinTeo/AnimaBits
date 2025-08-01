@@ -1,5 +1,5 @@
 {
-  "name": "gorillaz2d",
+  "name": "shadowbit",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
@@ -8,11 +8,11 @@
     "dist": "electron-builder"
   },
   "build": {
-    "appId": "com.gorrilaz2d.pet",
-    "productName": "Gorrilaz2D",
+    "appId": "com.shadowBit.pet",
+    "productName": "ShadowBit",
     "win": {
       "target": "nsis",
-      "icon": "assets/icones/icone2d.ico"
+      "icon": "assets/icones/iconeShadow.ico"
     },
     "files": [
       "**/*"
