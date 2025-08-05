@@ -70,6 +70,8 @@
 - Node.js e npm instalados
 
 ### Rodando localmente
+> De preferência rodar no cmd como Administrador caso não funcionar na primeira tentativa
+> Navegue até a pasta do projeto para executar o comando (princialmente 'npm run dist')
 
 ```bash
 npm install       //Para instalar o npm
